@@ -9781,27 +9781,63 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Welcome(props) {
-  return _react2.default.createElement(
-    'h1',
-    null,
-    'Hello, ',
-    props.name,
-    '! '
-  );
+function formatDate(date) {
+  return date.toLocaleDateString();
 }
 
-function App() {
+function Avatar(props) {
+  return _react2.default.createElement('img', { className: 'Avatar', src: props.avatarUrl, alt: props.name });
+}
+
+function UserInfo(props) {
   return _react2.default.createElement(
     'div',
-    null,
-    _react2.default.createElement(Welcome, { name: 'Sara' }),
-    _react2.default.createElement(Welcome, { name: 'Sara' }),
-    _react2.default.createElement(Welcome, { name: 'Sara' })
+    { className: 'UserInfo' },
+    _react2.default.createElement(Avatar, { avatarUrl: props.user.avatarUrl, name: props.user.name }),
+    _react2.default.createElement(
+      'div',
+      { className: 'UserInfo-name' },
+      props.user.name
+    )
   );
 }
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("root"));
+function CommentText(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'Comment-text' },
+    props.text
+  );
+}
+
+function CommentDate(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'Comment-date' },
+    formatDate(props.date)
+  );
+}
+
+function Comment(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'Comment' },
+    _react2.default.createElement(UserInfo, { user: props.author }),
+    _react2.default.createElement(CommentText, { text: props.text }),
+    _react2.default.createElement(CommentDate, { date: props.date })
+  );
+}
+
+var comment = {
+  date: new Date(),
+  text: 'I really hope you enjoy learning React!',
+  author: {
+    name: 'Hello Kitty',
+    avatarUrl: 'http://placekitten.com/g/64/64'
+  }
+};
+
+_reactDom2.default.render(_react2.default.createElement(Comment, { date: comment.date, text: comment.text, author: comment.author }), document.getElementById("root"));
 
 /***/ }),
 /* 84 */
