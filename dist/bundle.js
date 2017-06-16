@@ -9781,27 +9781,27 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function tick() {
-  var element = _react2.default.createElement(
-    'div',
+function Welcome(props) {
+  return _react2.default.createElement(
+    'h1',
     null,
-    _react2.default.createElement(
-      'h1',
-      null,
-      'Hello, world!'
-    ),
-    _react2.default.createElement(
-      'h2',
-      null,
-      'It is ',
-      new Date().toLocaleTimeString(),
-      '.'
-    )
+    'Hello, ',
+    props.name,
+    '! '
   );
-  _reactDom2.default.render(element, document.getElementById('root'));
 }
 
-setInterval(tick, 1000);
+function App() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(Welcome, { name: 'Sara' }),
+    _react2.default.createElement(Welcome, { name: 'Sara' }),
+    _react2.default.createElement(Welcome, { name: 'Sara' })
+  );
+}
+
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("root"));
 
 /***/ }),
 /* 84 */
