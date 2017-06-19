@@ -1,6 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+class Clock extends React.Component{
+  constructor(props) {
+    super(props),
+    this.state = {
+      date: new Date()
+    }
+  }
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000)
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  render() {
+    return (<h1>{this.state.date.toLocaleTimeString()}</h1>)
+  }
+  tick() {
+      this.setState({date: new Date()})
+  }
+
+}
+
+
 function formatDate (date) {
   return date.toLocaleDateString()
 }
@@ -40,7 +63,7 @@ function Comment (props) {
 
 const comment = {
   date: new Date(),
-  text: 'I really hope you enjoy learning React!',
+  text: 'I really hope you enjoy learning React - even on your Laptop!',
   author: {
     name: 'Hello Kitty',
     avatarUrl: 'http://placekitten.com/g/64/64'
@@ -48,6 +71,9 @@ const comment = {
 }
 
 ReactDOM.render(
-  <Comment date={comment.date} text={comment.text} author={comment.author}/>,
+  <div>
+    <Comment date={comment.date} text={comment.text} author={comment.author}/>
+    <Clock />
+  </div>,
   document.getElementById("root")
 )
