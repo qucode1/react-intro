@@ -9836,6 +9836,41 @@ var Clock = function (_React$Component) {
   return Clock;
 }(_react2.default.Component);
 
+var Toggle = function (_React$Component2) {
+  _inherits(Toggle, _React$Component2);
+
+  function Toggle(props) {
+    var _this3;
+
+    _classCallCheck(this, Toggle);
+
+    (_this3 = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props)), _this3), _this3.state = {
+      isToggleOn: true
+    };
+    _this3.handleClick = _this3.handleClick.bind(_this3);
+    return _this3;
+  }
+
+  _createClass(Toggle, [{
+    key: 'handleClick',
+    value: function handleClick() {
+      this.setState({
+        isToggleOn: !this.state.isToggleOn });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'button',
+        { onClick: this.handleClick },
+        this.state.isToggleOn ? "ON" : "OFF"
+      );
+    }
+  }]);
+
+  return Toggle;
+}(_react2.default.Component);
+
 function formatDate(date) {
   return date.toLocaleDateString();
 }
@@ -9887,7 +9922,7 @@ var comment = {
   date: new Date(),
   text: 'I really hope you enjoy learning React - even on your Laptop!',
   author: {
-    name: 'Hello Kitty',
+    name: 'Hello Kitty Cat',
     avatarUrl: 'http://placekitten.com/g/64/64'
   }
 };
@@ -9896,7 +9931,8 @@ _reactDom2.default.render(_react2.default.createElement(
   'div',
   null,
   _react2.default.createElement(Comment, { date: comment.date, text: comment.text, author: comment.author }),
-  _react2.default.createElement(Clock, null)
+  _react2.default.createElement(Clock, null),
+  _react2.default.createElement(Toggle, null)
 ), document.getElementById("root"));
 
 /***/ }),
