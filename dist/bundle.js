@@ -9789,6 +9789,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+{/*class comps*/}
+
 var Clock = function (_React$Component) {
   _inherits(Clock, _React$Component);
 
@@ -9861,15 +9863,104 @@ var Toggle = function (_React$Component2) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'button',
-        { onClick: this.handleClick },
-        this.state.isToggleOn ? "ON" : "OFF"
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleClick },
+          this.state.isToggleOn ? "Clock is ON" : "Clock is OFF"
+        ),
+        this.state.isToggleOn && _react2.default.createElement(Clock, null)
       );
     }
   }]);
 
   return Toggle;
 }(_react2.default.Component);
+
+var LoginControl = function (_React$Component3) {
+  _inherits(LoginControl, _React$Component3);
+
+  function LoginControl(props) {
+    var _this4;
+
+    _classCallCheck(this, LoginControl);
+
+    (_this4 = _possibleConstructorReturn(this, (LoginControl.__proto__ || Object.getPrototypeOf(LoginControl)).call(this, props)), _this4), _this4.state = { isLoggedIn: false }, _this4.handleLoginClick = _this4.handleLoginClick.bind(_this4), _this4.handleLogoutClick = _this4.handleLogoutClick.bind(_this4);
+    return _this4;
+  }
+
+  _createClass(LoginControl, [{
+    key: 'handleLoginClick',
+    value: function handleLoginClick() {
+      this.setState({ isLoggedIn: true });
+    }
+  }, {
+    key: 'handleLogoutClick',
+    value: function handleLogoutClick() {
+      this.setState({ isLoggedIn: false });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var isLoggedIn = this.state.isLoggedIn;
+      var button = null;
+      if (isLoggedIn) {
+        button = _react2.default.createElement(LogoutButton, { onClick: this.handleLogoutClick });
+      } else {
+        button = _react2.default.createElement(LoginButton, { onClick: this.handleLoginClick });
+      }
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(Greeting, { isLoggedIn: isLoggedIn }),
+        button
+      );
+    }
+  }]);
+
+  return LoginControl;
+}(_react2.default.Component);
+
+{/*functional comps*/}
+
+function UserGreeting(props) {
+  return _react2.default.createElement(
+    'h1',
+    null,
+    'Welcome back!'
+  );
+}
+
+function GuestGreeting(props) {
+  return _react2.default.createElement(
+    'h1',
+    null,
+    'Please sign up.'
+  );
+}
+
+function Greeting(props) {
+  var isLoggedIn = props.isLoggedIn;
+  return isLoggedIn ? _react2.default.createElement(UserGreeting, null) : _react2.default.createElement(GuestGreeting, null);
+}
+
+function LoginButton(props) {
+  return _react2.default.createElement(
+    'button',
+    { onClick: props.onClick },
+    'Login'
+  );
+}
+
+function LogoutButton(props) {
+  return _react2.default.createElement(
+    'button',
+    { onClick: props.onClick },
+    'Logout'
+  );
+}
 
 function formatDate(date) {
   return date.toLocaleDateString();
@@ -9931,8 +10022,8 @@ _reactDom2.default.render(_react2.default.createElement(
   'div',
   null,
   _react2.default.createElement(Comment, { date: comment.date, text: comment.text, author: comment.author }),
-  _react2.default.createElement(Clock, null),
-  _react2.default.createElement(Toggle, null)
+  _react2.default.createElement(Toggle, null),
+  _react2.default.createElement(LoginControl, null)
 ), document.getElementById("root"));
 
 /***/ }),

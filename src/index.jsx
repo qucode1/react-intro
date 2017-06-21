@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+{/*class comps*/}
+
 class Clock extends React.Component{
   constructor(props) {
     super(props),
@@ -38,11 +40,80 @@ class Toggle extends React.Component {
   }
   render () {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? "ON" : "OFF"}
-      </button>
+      <div>
+        <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? "Clock is ON" : "Clock is OFF"}
+        </button>
+        {this.state.isToggleOn &&
+          <Clock />
+        }
+      </div>
     )
   }
+}
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props),
+    this.state = {isLoggedIn: false},
+    this.handleLoginClick = this.handleLoginClick.bind(this),
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+  }
+  handleLoginClick() {
+    this.setState({isLoggedIn: true})
+  }
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false})
+  }
+  render() {
+    const isLoggedIn = this.state.isLoggedIn
+    let button = null
+    if(isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    )
+  }
+}
+
+{/*functional comps*/}
+
+function UserGreeting(props) {
+  return <h1>Welcome back!</h1>
+}
+
+function GuestGreeting(props) {
+  return <h1>Please sign up.</h1>
+}
+
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn
+  return (
+    isLoggedIn ? <UserGreeting /> : <GuestGreeting />
+  )
+}
+
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  )
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  )
 }
 
 function formatDate (date) {
@@ -94,8 +165,12 @@ const comment = {
 ReactDOM.render(
   <div>
     <Comment date={comment.date} text={comment.text} author={comment.author}/>
-    <Clock />
     <Toggle />
+    {/*
+    <Clock />
+    <Greeting isLoggedIn={true} />
+    */}
+    <LoginControl />
   </div>,
   document.getElementById("root")
 )
