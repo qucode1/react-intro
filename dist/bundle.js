@@ -9915,6 +9915,7 @@ var LoginControl = function (_React$Component3) {
         'div',
         null,
         _react2.default.createElement(Greeting, { isLoggedIn: isLoggedIn }),
+        isLoggedIn && _react2.default.createElement(NumberList, { numbers: [1, 2, 3, 4, 5, 6] }),
         button
       );
     }
@@ -9924,6 +9925,21 @@ var LoginControl = function (_React$Component3) {
 }(_react2.default.Component);
 
 {/*functional comps*/}
+
+function NumberList(props) {
+  var numbers = props.numbers;
+  return _react2.default.createElement(
+    'ul',
+    null,
+    numbers.map(function (number) {
+      return _react2.default.createElement(
+        'li',
+        { key: number.toString(), value: number },
+        number
+      );
+    })
+  );
+}
 
 function UserGreeting(props) {
   return _react2.default.createElement(

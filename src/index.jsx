@@ -77,6 +77,7 @@ class LoginControl extends React.Component {
     return (
       <div>
         <Greeting isLoggedIn={isLoggedIn} />
+        {isLoggedIn && <NumberList numbers={[1,2,3,4,5,6]}/>}
         {button}
       </div>
     )
@@ -84,6 +85,19 @@ class LoginControl extends React.Component {
 }
 
 {/*functional comps*/}
+
+function NumberList(props) {
+  const numbers = props.numbers
+  return (
+    <ul>
+      {numbers.map((number) =>
+        <li key={number.toString()} value={number}>
+          {number}
+        </li>
+      )}
+    </ul>
+  )
+}
 
 function UserGreeting(props) {
   return <h1>Welcome back!</h1>
